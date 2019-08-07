@@ -8,6 +8,8 @@ export default {
 			let baseClasses = {
 				[objGet(this.options, "validationErrorClass", "error")]: hasErrors,
 				[objGet(this.options, "validationSuccessClass", "valid")]: !hasErrors,
+				warning: !isNil(field.warning),
+				notice: !isNil(field.notice),
 				disabled: this.fieldDisabled(field),
 				readonly: this.fieldReadonly(field),
 				featured: this.fieldFeatured(field),

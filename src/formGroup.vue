@@ -15,6 +15,14 @@
 			</div>
 		</div>
 
+		<div v-if="field.warning" class="warnings help-block">
+			<i class="mdi mdi-alert"></i><span v-html="fieldWarning(field)"></span>
+		</div>
+
+		<div v-if="field.notice" class="notices help-block">
+			<i class="mdi mdi-information"></i><span v-html="fieldNotice(field)"></span>
+		</div>
+
 		<div v-if="field.hint" class="hint" v-html="fieldHint(field)"></div>
 
 		<div v-if="fieldErrors(field).length > 0" class="errors help-block">
@@ -100,6 +108,17 @@ export default {
 			if (isFunction(field.hint)) return field.hint.call(this, this.model, field, this);
 
 			return field.hint;
+		},
+		fieldWarning(field) {
+			if (isFunction(field.warning)) return field.warning.call(this, this.model, field, this);
+
+			return field.warning;
+		},
+
+		fieldNotice(field) {
+			if (isFunction(field.notice)) return field.notice.call(this, this.model, field, this);
+
+			return field.notice;
 		},
 		fieldErrors(field) {
 			return this.errors.filter((e) => e.field === field).map((item) => item.error);
