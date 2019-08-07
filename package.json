@@ -70,7 +70,7 @@
     "cross-env": "5.2.0",
     "css-loader": "0.28.11",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
-    "eslint": "4.19.1",
+    "eslint": "^4.19.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-friendly-formatter": "4.0.1",
     "eslint-loader": "2.0.0",
