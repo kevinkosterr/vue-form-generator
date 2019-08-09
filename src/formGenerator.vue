@@ -98,8 +98,12 @@ export default {
 			if (newModel != null) {
 				this.$nextTick(() => {
 					// Model changed!
-					if (this.options.validateAfterLoad === true && this.isNewModel !== true) {
-						this.validate();
+					if (this.options.validateAfterLoad && this.isNewModel !== true) {
+						if (Array.isArray(this.options.validateAfterLoad)) {
+							this.validateModelfield(this.options.validateAfterLoad)
+						} else {
+							this.validate();
+						}
 					} else {
 						this.clearValidationErrors();
 					}
@@ -112,8 +116,12 @@ export default {
 		this.$nextTick(() => {
 			if (this.model) {
 				// First load, running validation if neccessary
-				if (this.options.validateAfterLoad === true && this.isNewModel !== true) {
-					this.validate();
+				if (this.options.validateAfterLoad && this.isNewModel !== true) {
+					if (Array.isArray(this.options.validateAfterLoad)) {
+						this.validateModelfield(this.options.validateAfterLoad)
+					} else {
+						this.validate();
+					}
 				} else {
 					this.clearValidationErrors();
 				}
@@ -129,6 +137,25 @@ export default {
 			if (isNil(field.visible)) return true;
 
 			return field.visible;
+		},
+
+		validateModelfield(model) {
+			this.clearValidationErrors();
+
+			forEach(this.$children, child => {
+				if (isFunction(child.validate)) {
+					if (model.includes(child.field.model)) {
+					child.validate(true).then(function (error) {
+						if (error[0]) {
+							this.errors.push({
+								field: child.field,
+								error: error[0]
+							})
+						}
+					}.bind(this))
+				  }
+				}
+			});
 		},
 
 		// Child field executed validation

@@ -23,11 +23,11 @@
 			<i class="mdi mdi-information"></i><span v-html="fieldNotice(field)"></span>
 		</div>
 
-		<div v-if="field.hint" class="hint" v-html="fieldHint(field)"></div>
-
 		<div v-if="fieldErrors(field).length > 0" class="errors help-block">
 			<span v-for="(error, index) in fieldErrors(field)" :key="index" v-html="error"></span>
 		</div>
+
+		<div v-if="field.hint" class="hint" v-html="fieldHint(field)"></div>
 	</div>
 </template>
 <script>
