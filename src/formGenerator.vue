@@ -6,7 +6,7 @@ div.vue-form-generator(v-if='schema != null')
 
 	template(v-for='group in groups')
 		fieldset(v-if='isVisible(group)', :is='tag', :class='getFieldRowClasses(group)')
-			legend(v-if='group.legend') {{ group.legend }}{{ group.styleClasses }}
+			legend(v-if='group.legend') {{ group.legend }}
 			template(v-for='field in group.fields')
 				form-group(v-if='isVisible(field)', :vfg="vfg", :field="field", :errors="errors", :model="model", :options="options", @validated="onFieldValidated", @model-updated="onModelUpdated")
 </template>
