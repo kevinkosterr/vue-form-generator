@@ -100,7 +100,7 @@ export default {
 					// Model changed!
 					if (this.options.validateAfterLoad && this.isNewModel !== true) {
 						if (Array.isArray(this.options.validateAfterLoad)) {
-							this.validateModelfield(this.options.validateAfterLoad)
+							this.validateModelField(this.options.validateAfterLoad)
 						} else {
 							this.validate();
 						}
@@ -118,7 +118,7 @@ export default {
 				// First load, running validation if neccessary
 				if (this.options.validateAfterLoad && this.isNewModel !== true) {
 					if (Array.isArray(this.options.validateAfterLoad)) {
-						this.validateModelfield(this.options.validateAfterLoad)
+						this.validateModelField(this.options.validateAfterLoad)
 					} else {
 						this.validate();
 					}
@@ -139,7 +139,8 @@ export default {
 			return field.visible;
 		},
 
-		validateModelfield(model) {
+		// Validating one or more model properties
+		validateModelField(model) {
 			this.clearValidationErrors();
 
 			forEach(this.$children, child => {
