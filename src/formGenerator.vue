@@ -100,7 +100,7 @@ export default {
 					// Model changed!
 					if (this.options.validateAfterLoad && this.isNewModel !== true) {
 						if (Array.isArray(this.options.validateAfterLoad)) {
-							this.validateModelField(this.options.validateAfterLoad)
+							this.validateModelField(this.options.validateAfterLoad);
 						} else {
 							this.validate();
 						}
@@ -118,7 +118,7 @@ export default {
 				// First load, running validation if neccessary
 				if (this.options.validateAfterLoad && this.isNewModel !== true) {
 					if (Array.isArray(this.options.validateAfterLoad)) {
-						this.validateModelField(this.options.validateAfterLoad)
+						this.validateModelField(this.options.validateAfterLoad);
 					} else {
 						this.validate();
 					}
@@ -146,15 +146,15 @@ export default {
 			forEach(this.$children, child => {
 				if (isFunction(child.validate)) {
 					if (model.includes(child.field.model)) {
-					child.validate(true).then(function (error) {
-						if (error[0]) {
-							this.errors.push({
-								field: child.field,
-								error: error[0]
-							})
-						}
-					}.bind(this))
-				  }
+						child.validate(true).then(function (error) {
+							if (error[0]) {
+								this.errors.push({
+									field: child.field,
+									error: error[0]
+								});
+							}
+						}.bind(this));
+					}
 				}
 			});
 		},
