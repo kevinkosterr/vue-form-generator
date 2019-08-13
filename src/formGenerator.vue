@@ -131,7 +131,7 @@ export default {
 
 	methods: {
 		onBlur(value, model) {
-			if(objGet(this.options, "validateOffFocus", false)) {
+			if(objGet(this.options, "validateAfterBlur", false)) {
 				this.validateModelField(model)
 			}
 		},

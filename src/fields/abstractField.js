@@ -162,7 +162,7 @@ export default {
 					this.schema.onChanged.call(this, this.model, newValue, oldValue, this.schema);
 				}
 
-				if (objGet(this.formOptions, "validateOffFocus", false) === true) {
+				if (objGet(this.formOptions, "validateAfterBlur", false) === true) {
 					if (this.errors && this.errors[0]) {
 						if (objGet(this.schema, "validateDebounceTime", objGet(this.formOptions, "validateDebounceTime", 0)) > 0) {
 							this.debouncedValidate();
