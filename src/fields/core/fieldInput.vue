@@ -135,10 +135,12 @@ export default {
 			}
 			this.value = value;
 		},
-		onBlur() {
+		onBlur($event) {
 			if (isFunction(this.debouncedFormatFunc)) {
 				this.debouncedFormatFunc.flush();
 			}
+
+			this.$emit("blur", $event.target.value, this.schema.model);
 		}
 	},
 

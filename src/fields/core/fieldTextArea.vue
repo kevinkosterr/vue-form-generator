@@ -4,6 +4,7 @@
 		:id="getFieldID(schema)",
 		:class="schema.fieldClasses",
 		:disabled="disabled",
+		@blur="onBlur",
 		:maxlength="schema.max",
 		:minlength="schema.min",
 		:placeholder="schema.placeholder",
@@ -18,7 +19,12 @@
 import abstractField from "../abstractField";
 
 export default {
-	mixins: [abstractField]
+	mixins: [abstractField],
+	methods: {
+		onBlur($event) {
+			this.$emit("blur", $event.target.value, this.schema.model);
+		}
+	}
 };
 </script>
 

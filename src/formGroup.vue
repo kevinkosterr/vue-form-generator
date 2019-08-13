@@ -9,7 +9,7 @@
 		</label>
 
 		<div class="field-wrap">
-			<component ref="child" :is="getFieldType(field)" :vfg="vfg" :disabled="fieldDisabled(field)" :model="model" :schema="field" :formOptions="options" @model-updated="onModelUpdated" @validated="onFieldValidated"></component>
+			<component ref="child" :is="getFieldType(field)" :vfg="vfg" :disabled="fieldDisabled(field)" :model="model" :schema="field" :formOptions="options" @blur="onBlurValidated" @model-updated="onModelUpdated" @validated="onFieldValidated"></component>
 			<div v-if="buttonVisibility(field)" class="buttons">
 				<button v-for="(btn, index) in field.buttons" @click="buttonClickHandler(btn, field, $event)" :class="btn.classes" :key="index" v-text="btn.label" :type="getButtonType(btn)"></button>
 			</div>
@@ -122,6 +122,9 @@ export default {
 		},
 		fieldErrors(field) {
 			return this.errors.filter((e) => e.field === field).map((item) => item.error);
+		},
+		onBlurValidated(newVal, schema) {
+			this.$emit("blur", newVal, schema);
 		},
 		onModelUpdated(newVal, schema) {
 			this.$emit("model-updated", newVal, schema);
