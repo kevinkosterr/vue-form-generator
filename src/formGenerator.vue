@@ -132,7 +132,7 @@ export default {
 	methods: {
 		onBlur(value, model) {
 			if(objGet(this.options, "validateAfterBlur", false)) {
-				this.validateModelField(model)
+				this.validateModelField(model);
 			}
 		},
 
@@ -156,7 +156,7 @@ export default {
 								// Remove old child errors
 								Object.keys(this.errors)
 									.filter((key) => {
-										return this.errors[key].field.model === child.field.model
+										return this.errors[key].field.model === child.field.model;
 									})
 									.forEach(key => delete this.errors[key]);
 

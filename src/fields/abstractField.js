@@ -163,17 +163,17 @@ export default {
 				}
 
 				if (
-					(this.schema.validation && this.schema.validation === 'onBlur') ||
-					(!this.schema.validation && objGet(this.formOptions, 'validateAfterBlur', false) === true)
+					(this.schema.validation && this.schema.validation === "onBlur") ||
+					(!this.schema.validation && objGet(this.formOptions, "validateAfterBlur", false) === true)
 				) {
 					if (this.errors && this.errors[0]) {
-						this.validateSchemaField()
+						this.validateSchemaField();
 					}
 				} else if (
-					(this.schema.validation && this.schema.validation === 'onChanged') ||
-					(!this.schema.validation && objGet(this.formOptions, 'validateAfterChanged', false) === true)
+					(this.schema.validation && this.schema.validation === "onChanged") ||
+					(!this.schema.validation && objGet(this.formOptions, "validateAfterChanged", false) === true)
 				) {
-					this.validateSchemaField()
+					this.validateSchemaField();
 				}
 			}
 		},
