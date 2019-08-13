@@ -2,13 +2,13 @@
 div.vue-form-generator(v-if='schema != null')
 	fieldset(v-if="schema.fields", :is='tag')
 		template(v-for='field in fields')
-			form-group(v-if='isVisible(field)', :vfg="vfg", :field="field", :errors="errors", :model="model", :options="options", @validated="onFieldValidated", @model-updated="onModelUpdated")
+			form-group(v-if='isVisible(field)', :vfg="vfg", :field="field", :errors="errors", :model="model", :options="options", @blur="onBlur", @validated="onFieldValidated", @model-updated="onModelUpdated")
 
 	template(v-for='group in groups')
 		fieldset(v-if='isVisible(group)', :is='tag', :class='getFieldRowClasses(group)')
 			legend(v-if='group.legend') {{ group.legend }}
 			template(v-for='field in group.fields')
-				form-group(v-if='isVisible(field)', :vfg="vfg", :field="field", :errors="errors", :model="model", :options="options", @validated="onFieldValidated", @model-updated="onModelUpdated")
+				form-group(v-if='isVisible(field)', :vfg="vfg", :field="field", :errors="errors", :model="model", :options="options", @blur="onBlur", @validated="onFieldValidated", @model-updated="onModelUpdated")
 </template>
 
 <script>
@@ -130,6 +130,12 @@ export default {
 	},
 
 	methods: {
+		onBlur(value, model) {
+			if(objGet(this.options, "validateAfterBlur", false)) {
+				this.validateModelField(model)
+			}
+		},
+
 		// Get visible prop of field/group
 		isVisible(option) {
 			if (isFunction(option.visible)) return option.visible.call(this, this.model, option, this);
@@ -139,15 +145,21 @@ export default {
 			return option.visible;
 		},
 
+
 		// Validating one or more model properties
 		validateModelField(model) {
-			this.clearValidationErrors();
-
 			forEach(this.$children, child => {
 				if (isFunction(child.validate)) {
 					if (model.includes(child.field.model)) {
 						child.validate(true).then(function (error) {
 							if (error[0]) {
+								// Remove old child errors
+								Object.keys(this.errors)
+									.filter((key) => {
+										return this.errors[key].field.model === child.field.model
+									})
+									.forEach(key => delete this.errors[key]);
+
 								this.errors.push({
 									field: child.field,
 									error: error[0]
