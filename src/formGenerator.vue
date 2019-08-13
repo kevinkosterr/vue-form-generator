@@ -131,7 +131,9 @@ export default {
 
 	methods: {
 		onBlur(value, model) {
-		  this.validateModelField(model)
+			if(objGet(this.options, "validateOffFocus", false)) {
+				this.validateModelField(model)
+			}
 		},
 
 		// Get visible prop of field/group
