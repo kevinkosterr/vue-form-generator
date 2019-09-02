@@ -88,10 +88,10 @@ export default {
 
 		isItemDisabled(item) {
 			if (this.disabled || item.disabled) {
-				return true
+				return true;
 			}
 
-			return false
+			return false;
 		},
 
 		isItemChecked(item) {
