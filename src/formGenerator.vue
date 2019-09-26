@@ -151,7 +151,7 @@ export default {
 			forEach(this.$children, child => {
 				if (isFunction(child.validate)) {
 					if (model.includes(child.field.model)) {
-						child.validate(true).then(function (error) {
+						child.validate().then(function (error) {
 							if (error[0]) {
 								// Remove old child errors
 								Object.keys(this.errors)
