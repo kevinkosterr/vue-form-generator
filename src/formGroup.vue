@@ -130,7 +130,9 @@ export default {
 			this.$emit("model-updated", newVal, schema);
 		},
 		validate(calledParent) {
-			return this.$refs.child.validate(calledParent);
+			if (this.$refs.child) {
+				return this.$refs.child.validate(calledParent);
+			}
 		},
 		clearValidationErrors() {
 			if (this.$refs.child) {
