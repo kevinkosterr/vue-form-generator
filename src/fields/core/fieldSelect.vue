@@ -1,12 +1,13 @@
 <template lang="pug">
-	select.form-control(v-model="value", :disabled="disabled", :name="schema.inputName", :id="getFieldID(schema)", :class="schema.fieldClasses", v-attributes="'input'")
-		option(v-if="!selectOptions.hideNoneSelectedText", :disabled="schema.required", :value="null") {{ selectOptions.noneSelectedText || "&lt;Nothing selected&gt;" }}
+//	@Update:modelValue is added as a hack for the Vue-compat build to prevent `el[assignKey] is undefined`.
+select.form-control(v-model="value", @Update:modelValue="", :disabled="disabled", :name="schema.inputName", :id="getFieldID(schema)", :class="schema.fieldClasses", v-attributes="'input'")
+	option(v-if="!selectOptions.hideNoneSelectedText", :disabled="schema.required", :value="null") {{ selectOptions.noneSelectedText || "&lt;Nothing selected&gt;" }}
 
-		template(v-for="item in items")
-			optgroup(v-if="item.group", :label="getGroupName(item)")
-				option(v-if="item.ops", v-for="i in item.ops", :value="getItemValue(i)") {{ getItemName(i) }}
+	template(v-for="item in items")
+		optgroup(v-if="item.group", :label="getGroupName(item)")
+			option(v-if="item.ops", v-for="i in item.ops", :value="getItemValue(i)") {{ getItemName(i) }}
 
-			option(v-if="!item.group", :value="getItemValue(item)") {{ getItemName(item) }}
+		option(v-if="!item.group", :value="getItemValue(item)") {{ getItemName(item) }}
 </template>
 
 <script>
