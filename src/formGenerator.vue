@@ -238,6 +238,7 @@ export default {
 				return handleErrors(results);
 			}
 
+			// eslint-disable-next-line no-undef
 			return Promise.all(results).then(handleErrors);
 		},
 
