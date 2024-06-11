@@ -10,9 +10,10 @@ const banner =
 	" * https://github.com/vue-generators/vue-form-generator/\n" +
 	" * Released under the MIT License.\n" +
 	" */\n";
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const StatsPlugin = require("stats-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const vueLoaderConfig = require("./vue-loader.conf");
 
 let rules = [
@@ -24,6 +25,10 @@ let rules = [
 		options: {
 			formatter: require("eslint-friendly-formatter")
 		}
+	},
+	{
+		test: /\.(scss|css)$/i,
+		use: [MiniCssExtractPlugin.loader, "css-loader"],
 	},
 	{
 		test: /\.vue$/,
@@ -77,25 +82,11 @@ module.exports = [
 				collections: true,
 				paths: true,
 			}),
-			new webpack.optimize.UglifyJsPlugin({
-				compress: {
-					warnings: false
-				}
-			}),
-			new webpack.BannerPlugin({
-				banner,
-				raw: true
-			}),
-			new ExtractTextPlugin(cssFileName, { allChunks: true }),
-			new StatsPlugin("../stats.json", {
-				chunkModules: true
-				//exclude: [/node_modules[\\\/]react/]
-			})
+			new MiniCssExtractPlugin({filename: cssFileName}),
+			new ESLintPlugin({})
 		],
 
-		module: {
-			rules
-		},
+		module: { rules },
 
 		resolve: {
 			aliasFields: ["browser"],
