@@ -4,6 +4,7 @@
 		:id="getFieldID(schema)",
 		:class="schema.fieldClasses",
 		:disabled="disabled",
+		@Update:modelValue="value = $event"
 		@blur="onBlur",
 		:maxlength="schema.max",
 		:minlength="schema.min",
