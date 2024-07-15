@@ -5,6 +5,7 @@
 		:class="schema.fieldClasses",
 		:disabled="disabled",
 		@Update:modelValue="value = $event"
+		@ModelCompat:input="value = $event"
 		@blur="onBlur",
 		:maxlength="schema.max",
 		:minlength="schema.min",
