@@ -16,11 +16,11 @@
 		</div>
 
 		<div v-if="field.warning" class="warnings help-block">
-			<i class="mdi mdi-alert"></i><span v-html="fieldWarning(field)"></span>
+			<i class="mdi mdi-alert"></i> <span>{{ fieldWarning(field) }}</span>
 		</div>
 
 		<div v-if="field.notice" class="notices help-block">
-			<i class="mdi mdi-information"></i><span v-html="fieldNotice(field)"></span>
+			<i class="mdi mdi-information"></i> <span>{{ fieldNotice(field) }}</span>
 		</div>
 
 		<div v-if="fieldErrors(field).length > 0" class="errors help-block">

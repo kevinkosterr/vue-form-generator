@@ -8,8 +8,8 @@ div.vue-form-generator(v-if='schema != null')
 		fieldset(v-if='isVisible(group)', :is='tag', :class='getFieldRowClasses(group)')
 			legend(v-if='group.legend') {{ group.legend }}
 			div(v-if='group.hint', class="hint") {{ group.hint }}
-			div(v-if='group.notice', class="notices help-block") <i class="mdi mdi-information"></i><span v-html="group.notice"></span> {{ group.notice }}
-			div(v-if='group.warning', class="warnings help-block") <i class="mdi mdi-alert"></i><span v-html="group.warning"></span> {{ group.warning }}
+			div(v-if='group.notice', class="notices help-block") <i class="mdi mdi-information"></i> {{ group.notice }}
+			div(v-if='group.warning', class="warnings help-block") <i class="mdi mdi-alert"></i> {{ group.warning }}
 			ul(v-if='group.errors', class="errors help-block")
 				li(v-for='error in group.errors') {{ error }}
 			template(v-for='field in group.fields')
